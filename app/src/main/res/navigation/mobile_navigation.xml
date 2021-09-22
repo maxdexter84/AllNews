@@ -7,19 +7,33 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="ru.maxdexter.allnews.ui.home.HomeFragment"
+        android:name="ru.maxdexter.allnews.ui.fragments.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_newsFragment"
+            app:destination="@id/newsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="ru.maxdexter.allnews.ui.favourites.FavouritesFragment"
+        android:name="ru.maxdexter.allnews.ui.fragments.favourites.FavouritesFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="ru.maxdexter.allnews.ui.searchnews.SearchNewsFragment"
+        android:name="ru.maxdexter.allnews.ui.fragments.searchnews.SearchNewsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="ru.maxdexter.allnews.ui.fragments.news.NewsFragment"
+        android:label="news_fragment"
+        tools:layout="@layout/news_fragment" >
+        <argument
+            android:name="news_type"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

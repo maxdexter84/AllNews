@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tableTitleName">
+        <item>Главное</item>
+        <item>Экономика</item>
+        <item>Спорт</item>
+        <item>Здоровье</item>
+        <item>Наука</item>
+        <item>Технологии</item>
+        <item>Развлечения</item>
+    </string-array>
+</resources>
