@@ -16,14 +16,15 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_main"
-            app:title="@string/main_toolbar_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:title="@string/main_toolbar_title" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            app:tabMode="auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:tabMode="auto" />
     </com.google.android.material.appbar.AppBarLayout>
 
 
