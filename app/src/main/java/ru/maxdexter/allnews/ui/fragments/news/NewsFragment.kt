@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.maxdexter.allnews.databinding.NewsFragmentBinding
+
 private const val NEWS_TYPE = "news type"
+
 class NewsFragment : Fragment() {
 
 
@@ -20,7 +22,7 @@ class NewsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments.let {
-           newsType =  it?.getInt(NEWS_TYPE, -1)
+            newsType = it?.getInt(NEWS_TYPE, -1)
         }
     }
 
@@ -37,8 +39,8 @@ class NewsFragment : Fragment() {
         _binding = null
     }
 
-    companion object{
-        fun newInstance(type: Int): Fragment{
+    companion object {
+        fun newInstance(type: Int): Fragment {
             return NewsFragment().apply {
                 arguments = Bundle().apply {
                     putInt(NEWS_TYPE, type)

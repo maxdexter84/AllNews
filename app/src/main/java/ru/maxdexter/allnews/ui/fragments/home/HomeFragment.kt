@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import ru.maxdexter.allnews.R
 import ru.maxdexter.allnews.databinding.FragmentHomeBinding
@@ -32,7 +31,8 @@ class HomeFragment : Fragment() {
         val adapter = MainViewPagerAdapter(requireActivity())
         binding.viewPager.adapter = adapter
         val tabTitleList = resources.getStringArray(R.array.tableTitleName)
-        val tabLayout = TabLayoutMediator(binding.tabLayout,binding.viewPager
+        TabLayoutMediator(
+            binding.tabLayout, binding.viewPager
         ) { tab, position -> tab.text = tabTitleList[position] }.attach()
 
         return binding.root
