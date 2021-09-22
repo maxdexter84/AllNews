@@ -1,4 +1,4 @@
-package ru.maxdexter.allnews.ui.favourites
+package ru.maxdexter.allnews.ui.fragments.favourites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
