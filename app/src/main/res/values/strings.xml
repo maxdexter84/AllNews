@@ -6,4 +6,10 @@
     <string name="main_toolbar_title">Мои новости</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Что интересует?</string>
+    <string name="title">Заголовок</string>
+    <string name="description">Краткое описание</string>
+    <string name="published_at">01.23.45</string>
+    <string name="source">ссылка на статью</string>
+    <string name="full_description">Полное описание</string>
 </resources>
