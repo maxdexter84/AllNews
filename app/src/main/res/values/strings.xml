@@ -11,4 +11,5 @@
     <string name="description">Краткое описание</string>
     <string name="published_at">01.23.45</string>
     <string name="source">ссылка на статью</string>
+    <string name="full_description">Полное описание</string>
 </resources>
