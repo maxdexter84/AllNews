@@ -23,6 +23,6 @@ abstract class NewsDatabase : RoomDatabase() {
 
         private fun createDatabase(context: Context) = Room.databaseBuilder(context,
             NewsDatabase::class.java,
-            "article_db.db").build()
+            "app_db.db").build()
     }
 }
