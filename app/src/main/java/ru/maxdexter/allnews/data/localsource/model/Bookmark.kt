@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import ru.maxdexter.allnews.data.remotesource.model.Source
 import java.io.Serializable
 @Entity
-data class News(
+data class Bookmark(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
     var author: String? = null,
@@ -16,5 +16,6 @@ data class News(
     var source: Source? = null,
     var title: String? = null,
     var url: String? = null,
-    var urlToImage: String? = null
+    var urlToImage: String? = null,
+    var isBookmark: Boolean = false
 ) : Serializable
