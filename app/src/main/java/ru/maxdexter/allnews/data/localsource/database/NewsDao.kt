@@ -8,13 +8,13 @@ import ru.maxdexter.allnews.data.localsource.model.News
 interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(news: List<News>): Long
+    suspend fun insert(news: List<News>)
 
     @Query("SELECT * FROM news")
     fun getAllArticles(): LiveData<List<News>>
 
     @Delete
-    suspend fun deleteArticle(news: News): Int
+    suspend fun deleteArticle(news: News)
 
 
 

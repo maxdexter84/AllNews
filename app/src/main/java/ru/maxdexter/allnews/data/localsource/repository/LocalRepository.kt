@@ -11,7 +11,7 @@ interface LocalRepository {
     suspend fun deleteBookmark(bookmark: Bookmark)
 
 
-    suspend fun insertArticle(news: List<News>): Long
+    suspend fun insertArticle(news: List<News>)
     fun getAllArticles(): LiveData<List<News>>
-    suspend fun deleteArticle(news: News): Int
+    suspend fun deleteArticle(news: News)
 }
