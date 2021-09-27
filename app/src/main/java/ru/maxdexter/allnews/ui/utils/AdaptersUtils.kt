@@ -5,18 +5,35 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import androidx.viewbinding.ViewBinding
+import androidx.viewbinding.ViewBindings
+import ru.maxdexter.allnews.databinding.FragmentSearchBinding
 import ru.maxdexter.allnews.databinding.NewsFragmentBinding
 import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
 
-fun NewsAdapter.loadStateListener(binding: NewsFragmentBinding, context: Context) {
+fun NewsAdapter.loadStateListener(binding: ViewBinding, context: Context) {
     this.addLoadStateListener { loadState ->
-        // Показывать список можно только в том случае, если обновление прошло успешно.
-        binding.rvNewsFragment.isVisible = loadState.source.refresh is LoadState.NotLoading
-        // Показать загрузочный счетчик во время начальной загрузки или обновления.
-        binding.paginationProgressBar.isVisible = loadState.source.refresh is LoadState.Loading
-        // Покажите состояние повтора, если начальная загрузка или обновление завершатся неудачно.
-        binding.btnRetrySearch.isVisible = loadState.source.refresh is LoadState.Error
-        handlerParseLoadState(loadState, context)
+        when(binding){
+            is NewsFragmentBinding -> {
+                // Показывать список можно только в том случае, если обновление прошло успешно.
+                binding.rvNews.isVisible = loadState.source.refresh is LoadState.NotLoading
+                // Показать загрузочный счетчик во время начальной загрузки или обновления.
+                binding.paginationProgressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                // Покажите состояние повтора, если начальная загрузка или обновление завершатся неудачно.
+                binding.btnRetrySearch.isVisible = loadState.source.refresh is LoadState.Error
+                handlerParseLoadState(loadState, context)
+            }
+            is FragmentSearchBinding -> {
+                // Показывать список можно только в том случае, если обновление прошло успешно.
+                binding.rvSearchNews.isVisible = loadState.source.refresh is LoadState.NotLoading
+                // Показать загрузочный счетчик во время начальной загрузки или обновления.
+                binding.paginationProgressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                // Покажите состояние повтора, если начальная загрузка или обновление завершатся неудачно.
+                binding.btnRetrySearch.isVisible = loadState.source.refresh is LoadState.Error
+                handlerParseLoadState(loadState, context)
+            }
+        }
+
     }
 
 }

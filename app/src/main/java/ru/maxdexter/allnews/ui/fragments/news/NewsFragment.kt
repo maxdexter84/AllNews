@@ -81,7 +81,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.rvNewsFragment.apply {
+        binding.rvNews.apply {
             adapter = newsAdapter.withLoadStateHeaderAndFooter(
                 header = NewsLoadStateAdapter { newsAdapter.retry() },
                 footer = NewsLoadStateAdapter { newsAdapter.retry() }
