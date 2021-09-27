@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.maxdexter.allnews.databinding.ItemNewsPreviewBinding
 import ru.maxdexter.allnews.ui.model.UINews
+import ru.maxdexter.allnews.ui.utils.setImage
 
 class NewsViewHolder(private val binding: ItemNewsPreviewBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: UINews) {
-
-        binding.tvDescription.text = item.description
+        binding.ivArticleImage.setImage(item.urlToImage)
+       // binding.tvDescription.text = item.description
         binding.tvTitle.text = item.title
         binding.tvPublishedAt.text = item.publishedAt
         binding.tvSource.text = item.author

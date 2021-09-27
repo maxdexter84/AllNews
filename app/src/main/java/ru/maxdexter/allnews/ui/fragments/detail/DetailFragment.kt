@@ -1,27 +1,45 @@
 package ru.maxdexter.allnews.ui.fragments.detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.maxdexter.allnews.R
+import androidx.fragment.app.Fragment
+import ru.maxdexter.allnews.databinding.DetailFragmentBinding
+import ru.maxdexter.allnews.ui.model.UINews
+import ru.maxdexter.allnews.ui.utils.setImage
 
 class DetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
 
     private lateinit var viewModel: DetailViewModel
+    private var _binding: DetailFragmentBinding? = null
+    private val binding get() = _binding!!
+    private  var news: UINews? = null
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        news = arguments?.let {
+            DetailFragmentArgs.fromBundle(it).news
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.detail_fragment, container, false)
+    ): View {
+        _binding = DetailFragmentBinding.inflate(layoutInflater)
+        binding.ivArticleImage.setImage(news?.urlToImage)
+        binding.tvDescription.text = news?.description
+        binding.tvTitle.text = news?.title
+        binding.tvSource.text = news?.url
+        binding.tvPublishedAt.text = news?.publishedAt
+        return binding.root
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

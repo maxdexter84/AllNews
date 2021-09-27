@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.maxdexter.allnews.data.remotesource.api.RetrofitInstance
 import ru.maxdexter.allnews.data.remotesource.repository.RemoteRepositoryImpl
 import ru.maxdexter.allnews.databinding.NewsFragmentBinding
 import ru.maxdexter.allnews.domain.usecaseimpl.GetCategoryNewsUseCaseImpl
-import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
-import ru.maxdexter.allnews.ui.utils.loadStateListener
 import ru.maxdexter.allnews.ui.adapters.recycler.loadstate.NewsLoadStateAdapter
+import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
+import ru.maxdexter.allnews.ui.fragments.home.HomeFragmentDirections
+import ru.maxdexter.allnews.ui.utils.loadStateListener
 
 private const val NEWS_TYPE = "news type"
 
@@ -50,7 +51,9 @@ class NewsFragment : Fragment() {
     ): View {
         _binding = NewsFragmentBinding.inflate(layoutInflater)
         newsAdapter = NewsAdapter {
-
+            findNavController().navigate(
+              HomeFragmentDirections.actionNavigationHomeToDetailFragment(it)
+            )
         }
         return binding.root
     }
