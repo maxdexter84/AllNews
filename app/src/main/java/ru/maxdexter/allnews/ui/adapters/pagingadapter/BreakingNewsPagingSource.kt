@@ -2,15 +2,17 @@ package ru.maxdexter.allnews.ui.adapters.pagingadapter
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import retrofit2.HttpException
 import ru.maxdexter.allnews.domain.usecase.GetCategoryNewsUseCase
 import ru.maxdexter.allnews.ui.model.UINews
 
 
-class BreakingNewsPagingSource (private val useCase: GetCategoryNewsUseCase, private val category: String) :
+class BreakingNewsPagingSource(
+    private val useCase: GetCategoryNewsUseCase,
+    private val category: String
+) :
     PagingSource<Int, UINews>() {
     override fun getRefreshKey(state: PagingState<Int, UINews>): Int? {
-       return null
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UINews> {
@@ -34,7 +36,7 @@ class BreakingNewsPagingSource (private val useCase: GetCategoryNewsUseCase, pri
     }
 
     companion object {
-        const val PAGE_SIZE = 60
+        const val PAGE_SIZE = 20
         const val START_PAGE = 1
     }
 }

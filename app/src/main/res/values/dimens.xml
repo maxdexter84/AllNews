@@ -5,4 +5,5 @@
     <dimen name="medium_space_16dp">16dp</dimen>
     <dimen name="small_space_8dp">8dp</dimen>
     <dimen name="min_elevation_2dp">2dp</dimen>
+    <dimen name="error_text_size">18sp</dimen>
 </resources>
