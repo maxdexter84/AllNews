@@ -9,31 +9,52 @@
         android:id="@+id/navigation_home"
         android:name="ru.maxdexter.allnews.ui.fragments.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_favourites"
         android:name="ru.maxdexter.allnews.ui.fragments.favourites.FavouritesFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_favourites" />
+        tools:layout="@layout/fragment_favourites" >
+        <action
+            android:id="@+id/action_navigation_favourites_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="ru.maxdexter.allnews.ui.fragments.searchnews.SearchNewsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_search_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="ru.maxdexter.allnews.ui.fragments.news.NewsFragment"
         android:label="news_fragment"
-        tools:layout="@layout/news_fragment" >
+        tools:layout="@layout/news_fragment">
         <argument
             android:name="news_type"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="ru.maxdexter.allnews.ui.fragments.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="news"
+            app:argType="ru.maxdexter.allnews.ui.model.UINews"
+            app:nullable="true" />
     </fragment>
 </navigation>

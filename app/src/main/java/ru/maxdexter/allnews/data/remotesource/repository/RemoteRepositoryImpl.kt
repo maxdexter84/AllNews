@@ -1,7 +1,8 @@
 package ru.maxdexter.allnews.data.remotesource.repository
 
 import ru.maxdexter.allnews.data.remotesource.api.NewsAPI
-import ru.maxdexter.allnews.data.remotesource.model.Article
+import ru.maxdexter.allnews.domain.common.mapArticleToUINews
+import ru.maxdexter.allnews.ui.model.UINews
 
 class RemoteRepositoryImpl(private val api: NewsAPI) : RemoteRepository {
 
@@ -9,23 +10,23 @@ class RemoteRepositoryImpl(private val api: NewsAPI) : RemoteRepository {
         pageNumber: Int,
         pageSize: Int,
         category: String
-    ): List<Article> {
+    ): List<UINews> {
         return api.getBreakingNews(
             pageNumber = pageNumber,
             pageSize = pageSize,
             category = category
-        ).articles
+        ).articles.map { it.mapArticleToUINews() }
     }
 
     override suspend fun searchNews(
         pageNumber: Int,
         pageSize: Int,
         query: String
-    ): List<Article> {
+    ): List<UINews> {
         return api.searchingNews(
             searchQuery = query,
             pageNumber = pageNumber,
             pageSize = pageSize
-        ).articles
+        ).articles.map { it.mapArticleToUINews() }
     }
 }

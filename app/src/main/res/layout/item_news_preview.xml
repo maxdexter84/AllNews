@@ -34,32 +34,30 @@
 
         <TextView
             android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/small_space_8dp"
             app:layout_constraintLeft_toRightOf="@+id/ivArticleImage"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            tools:text="@string/title"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            tools:text="@string/title" />
 
-        <TextView
-            android:id="@+id/tvDescription"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivArticleImage"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:ellipsize="end"
-            android:maxLines="5"
-            tools:text="@string/description"
-            android:textColor="@android:color/black" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvDescription"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/ivArticleImage"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tvTitle"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:ellipsize="end"-->
+<!--            android:maxLines="5"-->
+<!--            tools:text="@string/description"-->
+<!--            android:textColor="@android:color/black" />-->
 
         <TextView
             android:id="@+id/tvPublishedAt"
