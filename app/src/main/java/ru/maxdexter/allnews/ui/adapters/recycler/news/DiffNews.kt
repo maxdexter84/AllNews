@@ -5,7 +5,7 @@ import ru.maxdexter.allnews.ui.model.UINews
 
 class DiffNews : DiffUtil.ItemCallback<UINews>() {
     override fun areItemsTheSame(oldItem: UINews, newItem: UINews): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.title == newItem.title
     }
 
     override fun areContentsTheSame(oldItem: UINews, newItem: UINews): Boolean {

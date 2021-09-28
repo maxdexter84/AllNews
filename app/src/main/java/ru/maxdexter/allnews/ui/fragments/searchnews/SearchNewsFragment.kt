@@ -11,10 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import ru.maxdexter.allnews.data.localsource.database.AppDatabase
+import ru.maxdexter.allnews.data.localsource.repository.LocalRepositoryImpl
 import ru.maxdexter.allnews.data.remotesource.api.RetrofitInstance
 import ru.maxdexter.allnews.data.remotesource.repository.RemoteRepositoryImpl
 import ru.maxdexter.allnews.databinding.FragmentSearchBinding
 import ru.maxdexter.allnews.domain.usecaseimpl.GetSearchNewsUseCaseImpl
+import ru.maxdexter.allnews.domain.usecaseimpl.SaveAndReturnNewsUseCaseImpl
 import ru.maxdexter.allnews.ui.adapters.recycler.loadstate.NewsLoadStateAdapter
 import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
 import ru.maxdexter.allnews.ui.utils.loadStateListener
@@ -25,9 +28,12 @@ class SearchNewsFragment : Fragment() {
         val api = RetrofitInstance.api
         val repository = RemoteRepositoryImpl(api)
         val useCase = GetSearchNewsUseCaseImpl(repository)
+        val newsDao = AppDatabase.invoke(requireContext()).getNewsDao()
+        val localRepository = LocalRepositoryImpl(newsDao)
+        val saveAndReturnNewsUseCase = SaveAndReturnNewsUseCaseImpl(localRepository)
         ViewModelProvider(
             this,
-            SearchNewsViewModelFactory(useCase)
+            SearchNewsViewModelFactory(useCase, saveAndReturnNewsUseCase)
         ).get(SearchNewsViewModel::class.java)
     }
     private var _binding: FragmentSearchBinding? = null
@@ -90,9 +96,10 @@ class SearchNewsFragment : Fragment() {
 
     private fun initRvAdapter() {
         newsAdapter = NewsAdapter {
+            viewModel.saveNews(it)
             findNavController().navigate(
                 SearchNewsFragmentDirections.actionNavigationSearchToDetailFragment(
-                    it
+                    it.title
                 )
             )
         }

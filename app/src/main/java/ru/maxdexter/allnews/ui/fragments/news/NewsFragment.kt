@@ -10,10 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import ru.maxdexter.allnews.data.localsource.database.AppDatabase
+import ru.maxdexter.allnews.data.localsource.repository.LocalRepositoryImpl
 import ru.maxdexter.allnews.data.remotesource.api.RetrofitInstance
 import ru.maxdexter.allnews.data.remotesource.repository.RemoteRepositoryImpl
 import ru.maxdexter.allnews.databinding.NewsFragmentBinding
 import ru.maxdexter.allnews.domain.usecaseimpl.GetCategoryNewsUseCaseImpl
+import ru.maxdexter.allnews.domain.usecaseimpl.SaveAndReturnNewsUseCaseImpl
 import ru.maxdexter.allnews.ui.adapters.recycler.loadstate.NewsLoadStateAdapter
 import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
 import ru.maxdexter.allnews.ui.fragments.home.HomeFragmentDirections
@@ -27,9 +30,15 @@ class NewsFragment : Fragment() {
     private var newsType: Int = 0
     private val viewModel: NewsViewModel by lazy {
         val api = RetrofitInstance.api
+        val newsDao = AppDatabase.invoke(requireContext()).getNewsDao()
+        val localRepository = LocalRepositoryImpl(newsDao)
         val repository = RemoteRepositoryImpl(api)
         val useCase = GetCategoryNewsUseCaseImpl(repository)
-        ViewModelProvider(this, NewsViewModelFactory(useCase)).get(NewsViewModel::class.java)
+        val saveNewsUseCase = SaveAndReturnNewsUseCaseImpl(localRepository)
+        ViewModelProvider(
+            this,
+            NewsViewModelFactory(useCase, saveNewsUseCase)
+        ).get(NewsViewModel::class.java)
     }
 
     private lateinit var newsAdapter: NewsAdapter
@@ -50,17 +59,28 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = NewsFragmentBinding.inflate(layoutInflater)
+        initNewsAdapter()
+        return binding.root
+    }
+
+    private fun initNewsAdapter() {
         newsAdapter = NewsAdapter {
+            viewModel.saveNews(it)
             findNavController().navigate(
-              HomeFragmentDirections.actionNavigationHomeToDetailFragment(it)
+                HomeFragmentDirections.actionNavigationHomeToDetailFragment(it.title)
             )
         }
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        observeData()
+
+
+    }
+
+    private fun observeData() {
         val categoryList = listOf(
             "general",
             "business",
@@ -76,8 +96,6 @@ class NewsFragment : Fragment() {
                 newsAdapter.submitData(res)
             }
         }
-
-
     }
 
     private fun initRecyclerView() {
