@@ -1,6 +1,7 @@
 package ru.maxdexter.allnews.data.localsource.repository
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 import ru.maxdexter.allnews.data.localsource.model.News
 
 interface LocalRepository {
@@ -10,4 +11,5 @@ interface LocalRepository {
     suspend fun deleteNews(news: News)
     suspend fun saveNewsAndReturn(news: News): News
     suspend fun saveNews(news: News)
+    fun getBookmark(isBookmark: Boolean): List<News>
 }

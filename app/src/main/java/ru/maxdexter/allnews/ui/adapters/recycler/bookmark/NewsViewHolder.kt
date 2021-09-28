@@ -1,13 +1,14 @@
-package ru.maxdexter.allnews.ui.adapters.recycler.news
+package ru.maxdexter.allnews.ui.adapters.recycler.bookmark
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.maxdexter.allnews.databinding.ItemNewsPreviewBinding
+import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsViewHolder
 import ru.maxdexter.allnews.ui.model.UINews
 import ru.maxdexter.allnews.ui.utils.setImage
 
-class NewsViewHolder(private val binding: ItemNewsPreviewBinding) :
+class BookmarksViewHolder(private val binding: ItemNewsPreviewBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: UINews) {

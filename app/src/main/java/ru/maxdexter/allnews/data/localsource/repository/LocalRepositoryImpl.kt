@@ -1,6 +1,7 @@
 package ru.maxdexter.allnews.data.localsource.repository
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.Flow
 import ru.maxdexter.allnews.data.localsource.database.NewsDao
 import ru.maxdexter.allnews.data.localsource.model.News
 
@@ -26,5 +27,9 @@ class LocalRepositoryImpl(private val newsDao: NewsDao) :
 
     override suspend fun saveNews(news: News) {
         newsDao.save(news)
+    }
+
+    override fun getBookmark(isBookmark: Boolean): List<News> {
+        return newsDao.getBookmarks(isBookmark)
     }
 }
