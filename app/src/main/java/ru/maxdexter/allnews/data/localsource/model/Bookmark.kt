@@ -7,15 +7,14 @@ import ru.maxdexter.allnews.data.remotesource.model.Source
 import java.io.Serializable
 @Entity
 data class Bookmark(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
-    var author: String? = null,
-    var content: String? = null,
-    var description: String? = null,
-    var publishedAt: String? = null,
+    var author: String = "",
+    var content: String = "",
+    var description: String = "",
+    var publishedAt: String = "",
     var source: Source? = null,
-    var title: String? = null,
-    var url: String? = null,
-    var urlToImage: String? = null,
+    @PrimaryKey
+    var title: String = "",
+    var url: String = "",
+    var urlToImage: String = "",
     var isBookmark: Boolean = false
 ) : Serializable

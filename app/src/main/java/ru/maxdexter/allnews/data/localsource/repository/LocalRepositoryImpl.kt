@@ -1,34 +1,35 @@
 package ru.maxdexter.allnews.data.localsource.repository
 
 import androidx.lifecycle.LiveData
-import ru.maxdexter.allnews.data.localsource.database.BookmarkDao
+import kotlinx.coroutines.flow.Flow
 import ru.maxdexter.allnews.data.localsource.database.NewsDao
-import ru.maxdexter.allnews.data.localsource.model.Bookmark
 import ru.maxdexter.allnews.data.localsource.model.News
 
-class LocalRepositoryImpl(private val bookmarkDao: BookmarkDao, private val newsDao: NewsDao) :
+class LocalRepositoryImpl(private val newsDao: NewsDao) :
     LocalRepository {
-    override suspend fun insertBookmark(bookmark: Bookmark) {
-        bookmarkDao.insert(bookmark)
+
+
+    override fun getAllNews(): LiveData<List<News>> {
+        return newsDao.getAllNews()
     }
 
-    override fun getAllBookmarks(): LiveData<List<Bookmark>> {
-        return bookmarkDao.getAllBookmarks()
+    override suspend fun getNews(title: String): News {
+        return newsDao.getNews(title)
     }
 
-    override suspend fun deleteBookmark(bookmark: Bookmark) {
-        bookmarkDao.deleteBookmark(bookmark)
+    override suspend fun deleteNews(news: News) {
+        newsDao.deleteNews(news)
     }
 
-    override suspend fun insertArticle(news: List<News>) {
-        newsDao.insert(news)
+    override suspend fun saveNewsAndReturn(news: News): News {
+        return newsDao.saveAndReturn(news)
     }
 
-    override fun getAllArticles(): LiveData<List<News>> {
-        return newsDao.getAllArticles()
+    override suspend fun saveNews(news: News) {
+        newsDao.save(news)
     }
 
-    override suspend fun deleteArticle(news: News) {
-        newsDao.deleteArticle(news)
+    override fun getBookmark(isBookmark: Boolean): List<News> {
+        return newsDao.getBookmarks(isBookmark)
     }
 }

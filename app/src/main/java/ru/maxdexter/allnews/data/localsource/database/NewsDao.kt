@@ -2,21 +2,34 @@ package ru.maxdexter.allnews.data.localsource.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import ru.maxdexter.allnews.data.localsource.model.News
 
 @Dao
 interface NewsDao {
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(news: News)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(news: List<News>)
+    suspend fun save(news: News)
 
     @Query("SELECT * FROM news")
-    fun getAllArticles(): LiveData<List<News>>
+    fun getAllNews(): LiveData<List<News>>
+
+    @Query("SELECT * FROM news WHERE title = :title")
+    fun getNews(title: String): News
 
     @Delete
-    suspend fun deleteArticle(news: News)
+    suspend fun deleteNews(news: News)
 
+    @Transaction
+    suspend fun saveAndReturn(news: News): News {
+        insert(news)
+        return getNews(news.title)
+    }
 
-
+    @Query("SELECT * FROM news WHERE isBookmark = :isBookmark")
+    fun getBookmarks(isBookmark: Boolean): List<News>
 
 }

@@ -8,11 +8,10 @@ import androidx.room.TypeConverters
 import ru.maxdexter.allnews.data.localsource.model.Bookmark
 import ru.maxdexter.allnews.data.localsource.model.News
 
-@Database(entities = [News::class, Bookmark::class], version = 1)
+@Database(entities = [News::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getNewsDao(): NewsDao
-    abstract fun getBookmarkDao(): BookmarkDao
 
     companion object {
         @Volatile

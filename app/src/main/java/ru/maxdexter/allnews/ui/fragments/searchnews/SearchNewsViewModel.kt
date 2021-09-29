@@ -6,12 +6,18 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import ru.maxdexter.allnews.domain.common.mapToNews
 import ru.maxdexter.allnews.domain.usecase.GetSearchNewsUseCase
+import ru.maxdexter.allnews.domain.usecase.SaveAndReturnNewsUseCase
 import ru.maxdexter.allnews.ui.adapters.pagingadapter.SearchingNewsPagingSource
 import ru.maxdexter.allnews.ui.model.UINews
 
-class SearchNewsViewModel(private val useCase: GetSearchNewsUseCase) : ViewModel() {
+class SearchNewsViewModel(
+    private val useCase: GetSearchNewsUseCase,
+    private val saveAndReturnNewsUseCase: SaveAndReturnNewsUseCase
+) : ViewModel() {
 
     private var currentQuery: String? = null
     private var currentSearchResult: Flow<PagingData<UINews>>? = null
@@ -35,5 +41,11 @@ class SearchNewsViewModel(private val useCase: GetSearchNewsUseCase) : ViewModel
             enablePlaceholders = false
         ),
             pagingSourceFactory = { SearchingNewsPagingSource(useCase, query) }).flow
+    }
+
+    fun saveNews(uiNews: UINews) {
+        viewModelScope.launch {
+            saveAndReturnNewsUseCase.saveNews(uiNews.mapToNews())
+        }
     }
 }

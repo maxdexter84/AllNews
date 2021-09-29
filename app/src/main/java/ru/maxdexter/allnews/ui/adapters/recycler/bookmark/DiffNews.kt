@@ -1,9 +1,9 @@
-package ru.maxdexter.allnews.ui.adapters.recycler.news
+package ru.maxdexter.allnews.ui.adapters.recycler.bookmark
 
 import androidx.recyclerview.widget.DiffUtil
 import ru.maxdexter.allnews.ui.model.UINews
 
-class DiffNews : DiffUtil.ItemCallback<UINews>() {
+class DiffBookmarks : DiffUtil.ItemCallback<UINews>() {
     override fun areItemsTheSame(oldItem: UINews, newItem: UINews): Boolean {
         return oldItem.title == newItem.title
     }

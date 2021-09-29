@@ -5,7 +5,6 @@ import java.io.Serializable
 
 
 data class UINews(
-    var id: Int,
     var author: String = "",
     var content: String = "",
     var description: String = "",
@@ -13,5 +12,6 @@ data class UINews(
     var source: Source? = null,
     var title: String = "",
     var url: String = "",
-    var urlToImage: String = ""
+    var urlToImage: String = "",
+    var isBookmark: Boolean = false
 ) : Serializable
