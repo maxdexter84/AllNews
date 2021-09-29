@@ -3,8 +3,9 @@ package ru.maxdexter.allnews.domain.usecaseimpl
 import ru.maxdexter.allnews.data.remotesource.repository.RemoteRepository
 import ru.maxdexter.allnews.domain.usecase.GetCategoryNewsUseCase
 import ru.maxdexter.allnews.ui.model.UINews
+import javax.inject.Inject
 
-class GetCategoryNewsUseCaseImpl(private val repository: RemoteRepository) :
+class GetCategoryNewsUseCaseImpl @Inject constructor(private val repository: RemoteRepository) :
     GetCategoryNewsUseCase {
 
     override suspend fun getCategoryNews(
