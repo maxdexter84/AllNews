@@ -12,4 +12,7 @@
     <string name="full_description">Полное описание</string>
     <string name="retry">Повторить</string>
     <string name="save_bookmark">Сохранить в закладки</string>
+    <string name="tv_splashscreen_header">Все</string>
+    <string name="tv_splashscreen_footer">Новости</string>
+    <string name="description_logo">logo</string>
 </resources>
