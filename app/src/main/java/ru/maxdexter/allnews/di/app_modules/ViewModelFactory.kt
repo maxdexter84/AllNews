@@ -1,4 +1,4 @@
-package ru.maxdexter.allnews.di
+package ru.maxdexter.allnews.di.app_modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
