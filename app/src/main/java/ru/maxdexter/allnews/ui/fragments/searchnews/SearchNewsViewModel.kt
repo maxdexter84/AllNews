@@ -13,8 +13,9 @@ import ru.maxdexter.allnews.domain.usecase.GetSearchNewsUseCase
 import ru.maxdexter.allnews.domain.usecase.SaveAndReturnNewsUseCase
 import ru.maxdexter.allnews.ui.adapters.pagingadapter.SearchingNewsPagingSource
 import ru.maxdexter.allnews.ui.model.UINews
+import javax.inject.Inject
 
-class SearchNewsViewModel(
+class SearchNewsViewModel @Inject constructor(
     private val useCase: GetSearchNewsUseCase,
     private val saveAndReturnNewsUseCase: SaveAndReturnNewsUseCase
 ) : ViewModel() {

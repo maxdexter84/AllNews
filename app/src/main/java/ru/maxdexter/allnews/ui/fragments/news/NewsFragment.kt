@@ -13,13 +13,7 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.maxdexter.allnews.App
-import ru.maxdexter.allnews.data.localsource.database.AppDatabase
-import ru.maxdexter.allnews.data.localsource.repository.LocalRepositoryImpl
-import ru.maxdexter.allnews.data.remotesource.api.RetrofitInstance
-import ru.maxdexter.allnews.data.remotesource.repository.RemoteRepositoryImpl
 import ru.maxdexter.allnews.databinding.NewsFragmentBinding
-import ru.maxdexter.allnews.domain.usecaseimpl.GetCategoryNewsUseCaseImpl
-import ru.maxdexter.allnews.domain.usecaseimpl.SaveAndReturnNewsUseCaseImpl
 import ru.maxdexter.allnews.ui.adapters.recycler.loadstate.NewsLoadStateAdapter
 import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
 import ru.maxdexter.allnews.ui.fragments.home.HomeFragmentDirections
@@ -32,23 +26,16 @@ class NewsFragment : Fragment() {
 
 
     private var newsType: Int = 0
-//    private val viewModel: NewsViewModel by lazy {
-//        val api = RetrofitInstance.api
-//        val newsDao = AppDatabase.invoke(requireContext()).getNewsDao()
-//        val localRepository = LocalRepositoryImpl(newsDao)
-//        val repository = RemoteRepositoryImpl(api)
-//        val useCase = GetCategoryNewsUseCaseImpl(repository)
-//        val saveNewsUseCase = SaveAndReturnNewsUseCaseImpl(localRepository)
-//        ViewModelProvider(
-//            this,
-//            NewsViewModelFactory(useCase, saveNewsUseCase)
-//        ).get(NewsViewModel::class.java)
-//    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<NewsViewModel> { viewModelFactory }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as App).appComponent.newsComponent()
+            .create().inject(this)
+    }
 
     private lateinit var newsAdapter: NewsAdapter
 
@@ -56,12 +43,6 @@ class NewsFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as App).appComponent.newsComponent()
-            .create().inject(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

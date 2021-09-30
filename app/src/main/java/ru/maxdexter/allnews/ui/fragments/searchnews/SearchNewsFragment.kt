@@ -1,45 +1,42 @@
 package ru.maxdexter.allnews.ui.fragments.searchnews
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import ru.maxdexter.allnews.data.localsource.database.AppDatabase
-import ru.maxdexter.allnews.data.localsource.repository.LocalRepositoryImpl
-import ru.maxdexter.allnews.data.remotesource.api.RetrofitInstance
-import ru.maxdexter.allnews.data.remotesource.repository.RemoteRepositoryImpl
+import ru.maxdexter.allnews.App
 import ru.maxdexter.allnews.databinding.FragmentSearchBinding
-import ru.maxdexter.allnews.domain.usecaseimpl.GetSearchNewsUseCaseImpl
-import ru.maxdexter.allnews.domain.usecaseimpl.SaveAndReturnNewsUseCaseImpl
 import ru.maxdexter.allnews.ui.adapters.recycler.loadstate.NewsLoadStateAdapter
 import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
 import ru.maxdexter.allnews.ui.utils.loadStateListener
+import javax.inject.Inject
 
 class SearchNewsFragment : Fragment() {
 
-    private val viewModel: SearchNewsViewModel by lazy {
-        val api = RetrofitInstance.api
-        val repository = RemoteRepositoryImpl(api)
-        val useCase = GetSearchNewsUseCaseImpl(repository)
-        val newsDao = AppDatabase.invoke(requireContext()).getNewsDao()
-        val localRepository = LocalRepositoryImpl(newsDao)
-        val saveAndReturnNewsUseCase = SaveAndReturnNewsUseCaseImpl(localRepository)
-        ViewModelProvider(
-            this,
-            SearchNewsViewModelFactory(useCase, saveAndReturnNewsUseCase)
-        ).get(SearchNewsViewModel::class.java)
-    }
+
     private var _binding: FragmentSearchBinding? = null
 
     private val binding get() = _binding!!
     private lateinit var newsAdapter: NewsAdapter
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<SearchNewsViewModel> { viewModelFactory }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as App).appComponent.searchComponent()
+            .create().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

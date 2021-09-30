@@ -11,8 +11,9 @@ import ru.maxdexter.allnews.domain.common.mapToUINews
 import ru.maxdexter.allnews.domain.usecase.GetNewsFromDbById
 import ru.maxdexter.allnews.domain.usecase.SaveNewsUseCase
 import ru.maxdexter.allnews.ui.model.UINews
+import javax.inject.Inject
 
-class DetailViewModel(
+class DetailViewModel @Inject constructor(
     private val saveNewsUseCase: SaveNewsUseCase,
     private val getNewsFromDbById: GetNewsFromDbById
 ) : ViewModel() {

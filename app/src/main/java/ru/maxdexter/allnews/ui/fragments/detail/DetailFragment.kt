@@ -1,36 +1,32 @@
 package ru.maxdexter.allnews.ui.fragments.detail
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import ru.maxdexter.allnews.App
 import ru.maxdexter.allnews.R
-import ru.maxdexter.allnews.data.localsource.database.AppDatabase
-import ru.maxdexter.allnews.data.localsource.repository.LocalRepositoryImpl
 import ru.maxdexter.allnews.databinding.DetailFragmentBinding
-import ru.maxdexter.allnews.domain.usecaseimpl.GetNewsFromDbByIdImpl
-import ru.maxdexter.allnews.domain.usecaseimpl.SaveNewsUseCaseImpl
 import ru.maxdexter.allnews.ui.utils.setImage
+import javax.inject.Inject
 
 class DetailFragment : Fragment() {
 
 
-    private val viewModel: DetailViewModel by lazy {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<DetailViewModel> { viewModelFactory }
 
-        val newsDao = AppDatabase.invoke(requireContext()).getNewsDao()
-        val localRepository = LocalRepositoryImpl(newsDao)
-        val getNewsFromDbById = GetNewsFromDbByIdImpl(localRepository)
-        val saveNewsUseCase = SaveNewsUseCaseImpl(localRepository)
-        ViewModelProvider(
-            this,
-            DetailViewModelFactory(
-                saveNewsUseCase,
-                getNewsFromDbById
-            )
-        ).get(DetailViewModel::class.java)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as App).appComponent.detailComponent()
+            .create().inject(this)
     }
+
     private var _binding: DetailFragmentBinding? = null
     private val binding get() = _binding!!
     private var id: String? = null
