@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 import ru.maxdexter.allnews.data.localsource.database.NewsDao
 import ru.maxdexter.allnews.data.localsource.model.News
+import javax.inject.Inject
 
-class LocalRepositoryImpl(private val newsDao: NewsDao) :
+class LocalRepositoryImpl @Inject constructor(private val newsDao: NewsDao) :
     LocalRepository {
 
 

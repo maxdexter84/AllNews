@@ -9,8 +9,9 @@ import kotlinx.coroutines.launch
 import ru.maxdexter.allnews.domain.common.mapToUINews
 import ru.maxdexter.allnews.domain.usecase.GetBookmarksUseCase
 import ru.maxdexter.allnews.ui.model.UINews
+import javax.inject.Inject
 
-class BookmarksViewModel(
+class BookmarksViewModel @Inject constructor(
     private val getBookmarksUseCase: GetBookmarksUseCase
 
 ) : ViewModel() {
