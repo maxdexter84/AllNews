@@ -3,8 +3,9 @@ package ru.maxdexter.allnews.data.remotesource.repository
 import ru.maxdexter.allnews.data.remotesource.api.NewsAPI
 import ru.maxdexter.allnews.domain.common.mapArticleToUINews
 import ru.maxdexter.allnews.ui.model.UINews
+import javax.inject.Inject
 
-class RemoteRepositoryImpl(private val api: NewsAPI) : RemoteRepository {
+class RemoteRepositoryImpl @Inject constructor(private val api: NewsAPI) : RemoteRepository {
 
     override suspend fun getBreakingNews(
         pageNumber: Int,
