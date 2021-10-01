@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.news.NewsFragment">
 
+
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/rv_news"
        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

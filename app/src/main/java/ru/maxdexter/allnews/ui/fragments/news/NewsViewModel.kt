@@ -24,17 +24,29 @@ class NewsViewModel @Inject constructor(
     private var currentSearchResult: Flow<PagingData<UINews>>? = null
 
 
-    fun getNews(category: String): Flow<PagingData<UINews>> {
+    fun getNews(type: Int): Flow<PagingData<UINews>> {
         val lastResult = currentSearchResult
-        if (lastResult != null && currentCategory == category) {
+        if (lastResult != null && currentCategory == getCategory(type)) {
             return lastResult
         }
-        currentCategory = category
+        currentCategory = getCategory(type)
 
         val newResult =
-            pagingNews(category).cachedIn(viewModelScope)//cachedIn кеширует данные из результатов запроса
+            pagingNews(getCategory(type)).cachedIn(viewModelScope)//cachedIn кеширует данные из результатов запроса
         currentSearchResult = newResult
         return newResult
+    }
+
+    private fun getCategory(type: Int): String {
+        return listOf(
+            "general",
+            "business",
+            "sports",
+            "health",
+            "science",
+            "technology",
+            "entertainment"
+        )[type]
     }
 
     private fun pagingNews(category: String): Flow<PagingData<UINews>> {
@@ -47,4 +59,5 @@ class NewsViewModel @Inject constructor(
             saveAndReturnNewsUseCase.saveNews(uiNews.mapToNews())
         }
     }
+
 }
