@@ -24,7 +24,6 @@ private const val NEWS_TYPE = "news type"
 
 class NewsFragment : Fragment() {
 
-
     private var newsType: Int = 0
 
     @Inject
@@ -37,7 +36,14 @@ class NewsFragment : Fragment() {
             .create().inject(this)
     }
 
-    private lateinit var newsAdapter: NewsAdapter
+    private val newsAdapter: NewsAdapter by lazy {
+        NewsAdapter {
+            viewModel.saveNews(it)
+            findNavController().navigate(
+                HomeFragmentDirections.actionNavigationHomeToDetailFragment(it.title)
+            )
+        }
+    }
 
     private var _binding: NewsFragmentBinding? = null
 
@@ -56,39 +62,19 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = NewsFragmentBinding.inflate(layoutInflater)
-        initNewsAdapter()
         return binding.root
     }
 
-    private fun initNewsAdapter() {
-        newsAdapter = NewsAdapter {
-            viewModel.saveNews(it)
-            findNavController().navigate(
-                HomeFragmentDirections.actionNavigationHomeToDetailFragment(it.title)
-            )
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         observeData()
-
-
     }
 
     private fun observeData() {
-        val categoryList = listOf(
-            "general",
-            "business",
-            "sports",
-            "health",
-            "science",
-            "technology",
-            "entertainment"
-        )
         lifecycleScope.launch {
-            viewModel.getNews(categoryList[newsType]).collect {
+            viewModel.getNews(newsType).collect {
                 val res = it
                 newsAdapter.submitData(res)
             }
