@@ -1,5 +1,6 @@
 package ru.maxdexter.allnews.di
 
+import android.app.Application
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
@@ -21,7 +22,7 @@ import ru.maxdexter.allnews.di.fragment_modules.search.SearchComponent
 interface AppComponent {
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance context: Context): AppComponent
+        fun create(@BindsInstance context: Context, @BindsInstance application: Application): AppComponent
     }
 
     fun newsComponent(): NewsComponent.Factory
