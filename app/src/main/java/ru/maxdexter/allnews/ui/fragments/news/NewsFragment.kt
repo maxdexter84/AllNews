@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.maxdexter.allnews.App
@@ -17,6 +18,7 @@ import ru.maxdexter.allnews.databinding.NewsFragmentBinding
 import ru.maxdexter.allnews.ui.adapters.recycler.loadstate.NewsLoadStateAdapter
 import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
 import ru.maxdexter.allnews.ui.fragments.home.HomeFragmentDirections
+import ru.maxdexter.allnews.ui.utils.NetworkCheck
 import ru.maxdexter.allnews.ui.utils.loadStateListener
 import javax.inject.Inject
 
@@ -29,6 +31,9 @@ class NewsFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<NewsViewModel> { viewModelFactory }
+
+    @Inject
+    lateinit var checkNetwork: NetworkCheck
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -70,13 +75,27 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         observeData()
+        observeNetwork()
+        initBtnRetry()
+    }
+
+    private fun initBtnRetry() {
+        binding.btnRetrySearch.setOnClickListener {
+            newsAdapter.retry()
+        }
+    }
+
+    private fun observeNetwork() {
+        checkNetwork.observe(viewLifecycleOwner, {
+            parseResult(it)
+            newsAdapter.retry()
+        })
     }
 
     private fun observeData() {
         lifecycleScope.launch {
             viewModel.getNews(newsType).collect {
-                val res = it
-                newsAdapter.submitData(res)
+                newsAdapter.submitData(it)
             }
         }
     }
@@ -89,6 +108,17 @@ class NewsFragment : Fragment() {
             )
         }
         newsAdapter.loadStateListener(binding, requireContext())
+    }
+
+    private fun parseResult(result: Boolean) {
+        when (result) {
+            false -> showSnackBar("Отсутствует интернет соедтинение!")
+            true -> {}
+        }
+    }
+
+    private fun showSnackBar(text: String) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {
@@ -105,5 +135,6 @@ class NewsFragment : Fragment() {
             }
         }
     }
+
 
 }

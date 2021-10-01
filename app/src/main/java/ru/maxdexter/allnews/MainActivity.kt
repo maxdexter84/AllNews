@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.maxdexter.allnews.databinding.ActivityMainBinding
-import ru.maxdexter.allnews.ui.utils.NetworkCheck
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,4 +25,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
 }
