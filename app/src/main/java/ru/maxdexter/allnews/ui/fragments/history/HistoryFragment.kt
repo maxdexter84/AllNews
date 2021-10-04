@@ -1,12 +1,19 @@
 package ru.maxdexter.allnews.ui.fragments.history
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import ru.maxdexter.allnews.App
 import ru.maxdexter.allnews.databinding.HistoryFragmentBinding
-import ru.maxdexter.allnews.ui.adapters.recycler.news.NewsAdapter
+import ru.maxdexter.allnews.ui.adapters.recycler.bookmark.BookmarksAdapter
+import ru.maxdexter.allnews.ui.fragments.bookmarks.BookmarksFragmentDirections
+import javax.inject.Inject
 
 class HistoryFragment : Fragment() {
 
@@ -14,12 +21,25 @@ class HistoryFragment : Fragment() {
         fun newInstance() = HistoryFragment()
     }
 
-    private lateinit var viewModel: HistoryViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<HistoryViewModel> { viewModelFactory }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as App).appComponent.historyComponent()
+            .create().inject(this)
+    }
+
     private var _binding: HistoryFragmentBinding? = null
     private val binding get() = _binding!!
-    private val newsAdapter: NewsAdapter by lazy {
-        NewsAdapter{
-
+    private val bookmarksAdapter: BookmarksAdapter by lazy {
+        BookmarksAdapter {
+            findNavController().navigate(
+                BookmarksFragmentDirections.actionBookmarksFragmentToDetailFragment(
+                    it.title
+                )
+            )
         }
     }
 
@@ -28,8 +48,18 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = HistoryFragmentBinding.inflate(layoutInflater)
-        binding.rvHistory.adapter = newsAdapter
+
+        viewModel.data.observe(viewLifecycleOwner, {
+            bookmarksAdapter.submitList(it)
+        })
+        binding.rvHistory.adapter = bookmarksAdapter
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadData()
     }
 
 
