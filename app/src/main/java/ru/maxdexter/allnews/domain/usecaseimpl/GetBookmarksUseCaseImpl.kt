@@ -5,8 +5,9 @@ import ru.maxdexter.allnews.data.localsource.repository.LocalRepository
 import ru.maxdexter.allnews.domain.usecase.GetBookmarksUseCase
 import javax.inject.Inject
 
-class GetBookmarksUseCaseImpl @Inject constructor(private val repository: LocalRepository): GetBookmarksUseCase {
-    override fun getBookmarks(isBookmarks: Boolean): List<News> {
+class GetBookmarksUseCaseImpl @Inject constructor(private val repository: LocalRepository) :
+    GetBookmarksUseCase {
+    override suspend fun getBookmarks(isBookmarks: Boolean): List<News> {
         return repository.getBookmark(isBookmarks)
     }
 }

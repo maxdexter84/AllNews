@@ -5,7 +5,8 @@ import ru.maxdexter.allnews.domain.usecase.GetSearchNewsUseCase
 import ru.maxdexter.allnews.ui.model.UINews
 import javax.inject.Inject
 
-class GetSearchNewsUseCaseImpl @Inject constructor(private val repository: RemoteRepository) : GetSearchNewsUseCase {
+class GetSearchNewsUseCaseImpl @Inject constructor(private val repository: RemoteRepository) :
+    GetSearchNewsUseCase {
     override suspend fun getSearchNews(
         pageNumber: Int,
         pageSize: Int,

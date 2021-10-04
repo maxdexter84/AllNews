@@ -5,7 +5,8 @@ import ru.maxdexter.allnews.data.localsource.repository.LocalRepository
 import ru.maxdexter.allnews.domain.usecase.SaveNewsUseCase
 import javax.inject.Inject
 
-class SaveNewsUseCaseImpl @Inject constructor(private val localRepository: LocalRepository) : SaveNewsUseCase {
+class SaveNewsUseCaseImpl @Inject constructor(private val localRepository: LocalRepository) :
+    SaveNewsUseCase {
     override suspend fun saveNews(news: News) {
         localRepository.saveNews(news)
     }
