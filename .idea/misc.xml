@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/drawable/ic_world.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/drawable/loading_img.xml" value="0.262037037037037" />
+        <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/layout-v29/item_news_preview.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/layout/detail_fragment.xml" value="0.25416666666666665" />
@@ -17,8 +18,9 @@
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/layout/item_view_pager.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/layout/load_state_view_item.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/layout/news_fragment.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
         <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/menu/detail_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxde/AndroidStudioProjects/AllNews/app/src/main/res/menu/history_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
