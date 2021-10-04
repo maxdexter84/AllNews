@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.maxdexter.allnews.domain.common.mapToUINews
 import ru.maxdexter.allnews.domain.usecase.DeleteHistoryUseCase
@@ -25,14 +26,15 @@ class HistoryViewModel @Inject constructor(
     }
 
     fun loadData() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _data.postValue(getHistoryUseCase.get().map { it.mapToUINews() })
         }
     }
 
-    private fun deleteHistory() {
-        viewModelScope.launch {
+    fun deleteHistory() {
+        viewModelScope.launch(Dispatchers.IO) {
             deleteHistoryUseCase.deleteHistory()
         }
+        loadData()
     }
 }

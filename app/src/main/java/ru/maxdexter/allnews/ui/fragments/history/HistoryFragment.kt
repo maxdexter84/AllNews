@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import ru.maxdexter.allnews.App
+import ru.maxdexter.allnews.R
 import ru.maxdexter.allnews.databinding.HistoryFragmentBinding
 import ru.maxdexter.allnews.ui.adapters.recycler.bookmark.BookmarksAdapter
 import javax.inject.Inject
@@ -53,7 +55,28 @@ class HistoryFragment : Fragment() {
         })
         binding.rvHistory.adapter = bookmarksAdapter
 
+        menuListener()
+
         return binding.root
+    }
+
+    private fun menuListener() {
+        binding.toolbarHistory.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.item_delete_history -> {
+                    showSnackbar { viewModel.deleteHistory() }
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun showSnackbar(block: () -> Unit) {
+        Snackbar.make(binding.root, "Вся история будет удалена", Snackbar.LENGTH_SHORT)
+            .setAction("Подтвердить") {
+                block.invoke()
+            }.show()
     }
 
     override fun onResume() {
