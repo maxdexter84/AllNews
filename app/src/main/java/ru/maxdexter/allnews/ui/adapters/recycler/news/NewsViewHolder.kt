@@ -14,7 +14,6 @@ class NewsViewHolder(private val binding: ItemNewsPreviewBinding) :
         binding.ivArticleImage.setImage(item.urlToImage)
         binding.tvTitle.text = item.title
         binding.tvPublishedAt.text = item.publishedAt
-        binding.tvSource.text = item.author
 
     }
 

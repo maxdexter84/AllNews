@@ -2,7 +2,6 @@ package ru.maxdexter.allnews.data.localsource.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import kotlinx.coroutines.flow.Flow
 import ru.maxdexter.allnews.data.localsource.model.News
 
 @Dao
@@ -32,4 +31,6 @@ interface NewsDao {
     @Query("SELECT * FROM news WHERE isBookmark = :isBookmark")
     fun getBookmarks(isBookmark: Boolean): List<News>
 
+    @Query("DELETE FROM news WHERE isBookmark = :isBookmark")
+    fun deleteNewsIfItIsNotBookmark(isBookmark: Boolean)
 }
