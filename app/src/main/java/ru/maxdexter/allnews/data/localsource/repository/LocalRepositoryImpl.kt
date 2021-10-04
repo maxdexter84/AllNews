@@ -30,7 +30,11 @@ class LocalRepositoryImpl @Inject constructor(private val newsDao: NewsDao) :
         newsDao.save(news)
     }
 
-    override fun getBookmark(isBookmark: Boolean): List<News> {
+    override suspend fun getBookmark(isBookmark: Boolean): List<News> {
         return newsDao.getBookmarks(isBookmark)
+    }
+
+    override suspend fun deleteHistory() {
+        newsDao.deleteNewsIfItIsNotBookmark(false)
     }
 }

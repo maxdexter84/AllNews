@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:forceDarkAllowed="true"
     app:cardCornerRadius="@dimen/small_space_8dp"
     app:cardElevation="@dimen/min_elevation_2dp">
 
@@ -17,7 +18,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivArticleImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:layout_marginBottom="@dimen/small_space_8dp"
             app:layout_constraintBottom_toTopOf="@+id/tvTitle"

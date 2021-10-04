@@ -24,4 +24,10 @@ abstract class UseCaseModules {
 
     @Binds
     abstract fun bindSaveNewsUseCase(saveNewsUseCaseImpl: SaveNewsUseCaseImpl): SaveNewsUseCase
+
+    @Binds
+    abstract fun bindGetHistoryUseCase(getHistoryUseCaseImpl: GetHistoryUseCaseImpl): GetHistoryUseCase
+
+    @Binds
+    abstract fun bindDeleteHistoryUseCase(deleteHistoryUseCaseImpl: DeleteHistoryUseCaseImpl): DeleteHistoryUseCase
 }

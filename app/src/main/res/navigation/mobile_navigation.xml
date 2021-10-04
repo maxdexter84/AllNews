@@ -55,4 +55,13 @@
             android:id="@+id/action_bookmarksFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="ru.maxdexter.allnews.ui.fragments.history.HistoryFragment"
+        android:label="history_fragment"
+        tools:layout="@layout/history_fragment" >
+        <action
+            android:id="@+id/action_historyFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

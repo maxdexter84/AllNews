@@ -11,5 +11,6 @@ interface LocalRepository {
     suspend fun deleteNews(news: News)
     suspend fun saveNewsAndReturn(news: News): News
     suspend fun saveNews(news: News)
-    fun getBookmark(isBookmark: Boolean): List<News>
+    suspend fun getBookmark(isBookmark: Boolean): List<News>
+    suspend fun deleteHistory()
 }

@@ -3,6 +3,7 @@ package ru.maxdexter.allnews.di
 import dagger.Module
 import ru.maxdexter.allnews.di.fragment_modules.bookmarks.BookmarksComponent
 import ru.maxdexter.allnews.di.fragment_modules.detail.DetailComponent
+import ru.maxdexter.allnews.di.fragment_modules.history.HistoryComponent
 import ru.maxdexter.allnews.di.fragment_modules.news.NewsComponent
 import ru.maxdexter.allnews.di.fragment_modules.search.SearchComponent
 
@@ -11,7 +12,8 @@ import ru.maxdexter.allnews.di.fragment_modules.search.SearchComponent
         NewsComponent::class,
         DetailComponent::class,
         SearchComponent::class,
-        BookmarksComponent::class
+        BookmarksComponent::class,
+        HistoryComponent::class
 
     ]
 )
