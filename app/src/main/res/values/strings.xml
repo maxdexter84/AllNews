@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AllNews</string>
-    <string name="title_home">Главные новости</string>
+    <string name="title_home">Новости</string>
     <string name="title_dashboard">Закладки</string>
     <string name="title_notifications">Поиск</string>
     <string name="main_toolbar_title">Мои новости</string>
@@ -16,4 +16,5 @@
     <string name="tv_splashscreen_footer">Новости</string>
     <string name="description_logo">logo</string>
     <string name="history">История</string>
+    <string name="delete_history_title">Удалить историю</string>
 </resources>

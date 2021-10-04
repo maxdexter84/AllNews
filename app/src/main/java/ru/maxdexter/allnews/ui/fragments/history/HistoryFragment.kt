@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import ru.maxdexter.allnews.App
 import ru.maxdexter.allnews.databinding.HistoryFragmentBinding
 import ru.maxdexter.allnews.ui.adapters.recycler.bookmark.BookmarksAdapter
-import ru.maxdexter.allnews.ui.fragments.bookmarks.BookmarksFragmentDirections
 import javax.inject.Inject
 
 class HistoryFragment : Fragment() {
@@ -36,7 +35,7 @@ class HistoryFragment : Fragment() {
     private val bookmarksAdapter: BookmarksAdapter by lazy {
         BookmarksAdapter {
             findNavController().navigate(
-                BookmarksFragmentDirections.actionBookmarksFragmentToDetailFragment(
+                HistoryFragmentDirections.actionHistoryFragmentToDetailFragment(
                     it.title
                 )
             )
